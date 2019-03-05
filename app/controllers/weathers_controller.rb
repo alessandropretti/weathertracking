@@ -7,6 +7,9 @@ class WeathersController < ApplicationController
         http.request(req)
         }
         j = JSON.parse(res.body, symbolize_names: true)
-        @t = j[:main][:temp]-273.15
+        n = j[:main][:temp]-273.15
+
+        @t = Weather.new(city: 'Buenos Aires', temperature: n, discrete_temperature: n.to_i)
+        @t.save
     end
 end
